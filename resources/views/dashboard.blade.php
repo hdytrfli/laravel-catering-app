@@ -1,17 +1,20 @@
-<x-app-layout>
-  <x-slot name="header">
-    <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-      {{ __('Dashboard') }}
-    </h2>
-  </x-slot>
+<x-dashboard-layout>
+  <x-dashboard.heading>
+    <x-slot:title>Dashboard</x-slot:title>
+    <x-slot:description>Welcome to the dashboard</x-slot:description>
+  </x-dashboard.heading>
 
-  <div class="py-12">
-    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-      <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-        <div class="p-6 text-gray-900">
-          {{ __("You're logged in!") }}
-        </div>
+  <x-ui.card>
+    <x-slot:header>
+      <i data-lucide="activity" class="size-5 text-primary-500"></i>
+      <h5>Recent Activities</h5>
+    </x-slot:header>
+
+    <div class="grid w-full aspect-banner place-content-center">
+      <div class="flex items-center gap-2 text-sm">
+        <i data-lucide="activity" class="text-primary-500 size-5"></i>
+        <span class="text-base-500">No recent activities</span>
       </div>
     </div>
-  </div>
-</x-app-layout>
+  </x-ui.card>
+</x-dashboard-layout>

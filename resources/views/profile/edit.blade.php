@@ -1,29 +1,57 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Profile') }}
-        </h2>
-    </x-slot>
+<x-dashboard-layout>
+  <x-dashboard.heading>
+    <x-slot:title>Profile</x-slot:title>
+    <x-slot:description>Update your account's profile information and email address.</x-slot:description>
+  </x-dashboard.heading>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.update-profile-information-form')
-                </div>
-            </div>
+  <div class="grid items-start grid-cols-2 gap-6">
+    <x-ui.card as="form" method="post" action="{{ route('profile.update') }}">
+      <x-slot:header>
+        <h5>Profile Information</h5>
+      </x-slot:header>
 
-            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.update-password-form')
-                </div>
-            </div>
+      @csrf
+      @method('PATCH')
+      @include('profile.partials.update')
 
-            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.delete-user-form')
-                </div>
-            </div>
-        </div>
-    </div>
-</x-app-layout>
+      <x-slot:footer>
+        <x-ui.button>
+          <span>Save</span>
+          <i data-lucide="arrow-up-right" class="size-5"></i>
+        </x-ui.button>
+      </x-slot:footer>
+    </x-ui.card>
+
+    <x-ui.card as="form" method="post" action="{{ route('password.update') }}">
+      <x-slot:header>
+        <h5>Update Password</h5>
+      </x-slot:header>
+
+      @csrf
+      @method('PUT')
+      @include('profile.partials.password')
+
+      <x-slot:footer>
+        <x-ui.button>
+          <span>Update</span>
+          <i data-lucide="arrow-up-right" class="size-5"></i>
+        </x-ui.button>
+      </x-slot:footer>
+    </x-ui.card>
+
+    <x-ui.card class="col-span-full">
+      <x-slot:header>
+        <h5>Delete Account</h5>
+      </x-slot:header>
+
+      @include('profile.partials.delete')
+
+      <x-slot:footer class="justify-end">
+        <x-ui.button x-data="" x-on:click.prevent="$dispatch('open-modal', 'confirm-user-deletion')"
+          variant="destructive">
+          Delete Account
+        </x-ui.button>
+      </x-slot:footer>
+    </x-ui.card>
+  </div>
+</x-dashboard-layout>

@@ -1,9 +1,9 @@
 ### Required Features
 
 - [x] Setup User models, add roles with Enums
-- [ ] Add Merchant and Customer models
-- [ ] Setup Authentication with Laravel UI
-- [ ] Setup layouts for Authentication and Dashboard 
+- [x] Add Merchant and Customer models
+- [x] Setup Authentication with Laravel UI
+- [x] Setup layouts for Authentication and Dashboard 
 - [ ] Setup Profile Management for each Role
 - [ ] Add Menu CRUD
 - [ ] Add Order Model
