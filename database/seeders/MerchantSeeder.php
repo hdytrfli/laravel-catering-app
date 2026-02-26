@@ -2,22 +2,19 @@
 
 namespace Database\Seeders;
 
+use App\Models\Merchant;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-class DatabaseSeeder extends Seeder
+class MerchantSeeder extends Seeder
 {
     use WithoutModelEvents;
 
     /**
-     * Seed the application's database.
+     * Run the database seeds.
      */
     public function run(): void
     {
-        $this->call([
-            UserSeeder::class,
-            MerchantSeeder::class,
-            CustomerSeeder::class,
-        ]);
+        Merchant::factory()->count(20)->create();
     }
 }
