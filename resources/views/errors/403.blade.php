@@ -3,7 +3,11 @@
 
 <x-head />
 
-<body class="font-sans antialiased">
+<body class="relative font-sans antialiased">
+  <div class="absolute top-0 right-0 w-full px-6 py-5">
+    <x-ui.logo class="max-w-40" />
+  </div>
+
   <div class="container grid h-screen max-w-7xl place-items-center">
     <div class="flex flex-col justify-center gap-6 text-center">
       <h1 class="text-6xl font-bold truncate text-zinc-900">

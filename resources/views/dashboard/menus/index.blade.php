@@ -76,7 +76,7 @@
           </td>
         </tr>
       @empty
-        <x-ui.empty colspan="4" />
+        <x-ui.empty colspan="8" />
       @endforelse
     </x-slot:body>
   </x-ui.table>

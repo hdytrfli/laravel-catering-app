@@ -14,7 +14,7 @@
           'border border-yellow-200 bg-yellow-50 text-yellow-800' => $variant == 'warning',
       ])
       ->merge([
-          'class' => 'p-4 rounded-lg mb-4 text-sm flex items-start gap-2',
+          'class' => 'p-4 rounded-lg text-sm flex items-start gap-2',
       ]);
 
   $icon = match ($variant) {

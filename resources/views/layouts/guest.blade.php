@@ -34,8 +34,7 @@
       </div>
     </div>
 
-    <div class="relative grid
-          items-center h-screen overflow-y-auto">
+    <div class="relative grid items-center h-screen overflow-y-auto">
       <div class="absolute top-0 right-0 p-10">
         <x-ui.logo class="max-w-40" />
       </div>
