@@ -79,7 +79,7 @@
   <div class="flex flex-col h-full gap-6 overflow-y-auto">
     <div class="sticky top-0 z-10 bg-white border-b border-base-200">
       <a href="{{ route('welcome') }}" class="flex items-center h-20 px-6">
-        <x-ui.logo class="max-w-32" />
+        <x-ui.logo class="max-w-40" />
       </a>
     </div>
 
