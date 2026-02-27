@@ -2,6 +2,7 @@
 
 use App\Models\User;
 use App\Enums\RoleType;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
@@ -13,25 +14,33 @@ if (app()->environment('local')) {
         ->group(function () {
             Route::get('migrate', function () {
                 $user = Auth::user();
+                $role = $user->role;
+
                 Artisan::call('migrate:fresh', ['--seed' => true]);
 
+                $user = User::where('role', $role)->first();
                 Auth::loginUsingId($user->id);
+
                 return back()->with('success', 'Database migrated and seeded successfully.');
             })->name('migrate');
 
             Route::get('reset', function () {
                 $user = Auth::user();
+                $role = $user->role;
+
                 Artisan::call('migrate:fresh');
                 Artisan::call('db:seed', ['--class' => 'UserSeeder']);
 
+                $user = User::where('role', $role)->first();
                 Auth::loginUsingId($user->id);
+
                 return back()->with('success', 'Database migrated successfully.');
             })->name('reset');
 
-            Route::get('impersonate', function () {
+            Route::get('impersonate', function (Request $request) {
                 $merchant = User::where('role', RoleType::MERCHANT)->first();
                 $customer = User::where('role', RoleType::CUSTOMER)->first();
-                $role = request('role');
+                $role = $request->input('role');
 
                 match ($role) {
                     RoleType::MERCHANT->value => Auth::login($merchant),

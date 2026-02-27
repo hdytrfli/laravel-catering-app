@@ -1,4 +1,6 @@
 @php
+  use App\Enums\RoleType;
+
   $props = $attributes
       ->class([
           'border-r border-base-200',
@@ -11,7 +13,7 @@
           'aria-label' => 'Sidenav',
       ]);
 
-  $navigations = array_to_object([
+  $merchant = array_to_object([
       [
           'id' => 'menus',
           'label' => 'Menu Management',
@@ -19,7 +21,7 @@
               [
                   'type' => 'link',
                   'href' => route('menus.index'),
-                  'active' => request()->routeIs('menus.*'),
+                  'active' => request()->routeIs('menus.*') && !request()->routeIs('menus.create'),
                   'name' => 'Menu List',
                   'icon' => 'cooking-pot',
               ],
@@ -40,39 +42,63 @@
                   'type' => 'link',
                   'href' => route('dashboard'),
                   'active' => request()->routeIs('orders.*'),
-                  'name' => 'Order List',
+                  'name' => 'Order Listing',
                   'icon' => 'shopping-cart',
               ],
               [
                   'type' => 'link',
                   'href' => route('dashboard'),
-                  'active' => request()->routeIs('orders.create'),
-                  'name' => 'Create New Order',
-                  'icon' => 'plus',
-              ],
-          ],
-      ],
-      [
-          'id' => 'Invoices',
-          'label' => 'Invoice Management',
-          'menus' => [
-              [
-                  'type' => 'link',
-                  'href' => route('dashboard'),
                   'active' => request()->routeIs('invoices.*'),
-                  'name' => 'Invoice List',
+                  'name' => 'Order Invoices',
                   'icon' => 'landmark',
               ],
               [
                   'type' => 'link',
                   'href' => route('dashboard'),
-                  'active' => request()->routeIs('invoices.create'),
-                  'name' => 'Invoice Reports',
+                  'active' => request()->routeIs('reports.*'),
+                  'name' => 'Order Reports',
                   'icon' => 'archive',
               ],
           ],
       ],
   ]);
+
+  $customer = array_to_object([
+      [
+          'id' => 'orders',
+          'label' => 'Order Management',
+          'menus' => [
+              [
+                  'type' => 'link',
+                  'href' => route('dashboard'),
+                  'active' => request()->routeIs('orders.create'),
+                  'name' => 'Create Order',
+                  'icon' => 'plus',
+              ],
+              [
+                  'type' => 'link',
+                  'href' => route('dashboard'),
+                  'active' => request()->routeIs('invoices.*'),
+                  'name' => 'Order Invoices',
+                  'icon' => 'landmark',
+              ],
+              [
+                  'type' => 'link',
+                  'href' => route('dashboard'),
+                  'active' => request()->routeIs('reports.*'),
+                  'name' => 'Order Reports',
+                  'icon' => 'archive',
+              ],
+          ],
+      ],
+  ]);
+
+  $user = Auth::user();
+  $navigations = match ($user->role) {
+      RoleType::MERCHANT => $merchant,
+      RoleType::CUSTOMER => $customer,
+      default => $merchant,
+  };
 @endphp
 
 <aside {{ $props }}>
