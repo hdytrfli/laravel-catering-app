@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
+use App\Helpers\Distance;
 use App\Enums\CategoryType;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -47,5 +49,23 @@ class Merchant extends Model
     public function menus(): HasMany
     {
         return $this->hasMany(Menu::class);
+    }
+
+    /**
+     * Getter for the distance property.
+     *
+     * @return float
+     */
+    public function getDistanceAttribute(): float
+    {
+        $customer = Auth::user()->customer;
+
+        if (!$customer) return 0;
+        return Distance::haversine(
+            $customer->latitude,
+            $customer->longitude,
+            $this->latitude,
+            $this->longitude
+        );
     }
 }

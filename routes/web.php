@@ -1,11 +1,13 @@
 <?php
 
 use App\Enums\RoleType;
+use App\Models\Merchant;
 use App\Helpers\MiddlewareRule;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\MerchantController;
 use App\Http\Controllers\DashboardController;
 
 Route::middleware('auth')
@@ -44,6 +46,14 @@ Route::middleware('auth')
 Route::middleware('auth', 'role:' . RoleType::MERCHANT->value)
     ->group(function () {
         Route::resource('menus', MenuController::class);
+    });
+
+Route::middleware('auth', 'role:' . RoleType::CUSTOMER->value)
+    ->controller(MerchantController::class)
+    ->prefix('merchants')
+    ->as('merchants.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
     });
 
 require __DIR__ . '/auth.php';

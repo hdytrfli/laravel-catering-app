@@ -70,8 +70,8 @@
           'menus' => [
               [
                   'type' => 'link',
-                  'href' => route('dashboard'),
-                  'active' => request()->routeIs('orders.create'),
+                  'href' => route('merchants.index'),
+                  'active' => request()->routeIs('merchants.*'),
                   'name' => 'Create Order',
                   'icon' => 'plus',
               ],
