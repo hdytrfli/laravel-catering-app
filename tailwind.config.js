@@ -35,7 +35,7 @@ export default {
                 'icon': '46px',
             },
             aspectRatio: {
-                'banner': '3/1',
+                'banner': '5/2',
                 'poster': '3/4',
                 'thumbnail': '4/3',
             }

@@ -26,8 +26,19 @@ class MerchantController extends Controller
 
         return view('dashboard.merchants.index', [
             'merchants' => $merchants,
-            'userLat'   => $customer->latitude,
-            'userLng'   => $customer->longitude,
+            'latitude'  => $customer->latitude,
+            'longitude' => $customer->longitude,
+        ]);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function show(Merchant $merchant)
+    {
+        $merchant->load('menus');
+        return view('dashboard.merchants.show', [
+            'merchant' => $merchant,
         ]);
     }
 }

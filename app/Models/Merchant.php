@@ -4,7 +4,9 @@ namespace App\Models;
 
 use App\Helpers\Distance;
 use App\Enums\CategoryType;
+use Illuminate\Support\Uri;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -66,6 +68,23 @@ class Merchant extends Model
             $customer->longitude,
             $this->latitude,
             $this->longitude
+        );
+    }
+
+    /**
+     * Override the avatar attribute if the merchant has no avatar.
+     */
+    protected function avatar(): Attribute
+    {
+        return Attribute::make(
+            get: function ($value) {
+                if ($value) return $value;
+                return Uri::of('https://i.pravatar.cc')
+                    ->withQuery([
+                        'u' => urlencode($this->company),
+                        's' => '150',
+                    ]);
+            },
         );
     }
 }

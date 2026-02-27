@@ -63,4 +63,12 @@ enum CategoryType: string
             self::WESTERN => 'Cuisine from Europe and the Americas rooted in classical and modern culinary traditions.',
         };
     }
+
+    /**
+     * Get the color for the specified category type.
+     */
+    public function color(): string
+    {
+        return 'bg-primary-500';
+    }
 }

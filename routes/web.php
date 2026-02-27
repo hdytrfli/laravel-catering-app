@@ -49,12 +49,11 @@ Route::middleware('auth', 'role:' . RoleType::MERCHANT->value)
     });
 
 Route::middleware('auth', 'role:' . RoleType::CUSTOMER->value)
-    ->controller(MerchantController::class)
-    ->prefix('merchants')
-    ->as('merchants.')
-    ->group(function () {
-        Route::get('/', 'index')->name('index');
-    });
+    ->resource('merchants', MerchantController::class)
+    ->only([
+        'index',
+        'show'
+    ]);
 
 require __DIR__ . '/auth.php';
 require __DIR__ . '/development.php';
