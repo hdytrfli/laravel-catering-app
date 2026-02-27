@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Enums\RoleType;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
@@ -22,8 +24,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Model::preventLazyLoading();
-        Blade::if('development', function () {
-            return app()->environment('local');
-        });
+        Blade::if('development', fn() => app()->environment('local'));
+        Blade::if('merchant', fn() => Auth::user()->role === RoleType::MERCHANT);
+        Blade::if('customer', fn() => Auth::user()->role === RoleType::CUSTOMER);
     }
 }

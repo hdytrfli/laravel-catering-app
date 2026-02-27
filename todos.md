@@ -4,7 +4,7 @@
 - [x] Add Merchant and Customer models
 - [x] Setup Authentication with Laravel UI
 - [x] Setup layouts for Authentication and Dashboard 
-- [ ] Setup Profile Management for each Role
+- [x] Setup Profile Management for each Role
 - [x] Add Menu CRUD
 - [ ] Add Order Model
 - [ ] Add OrderItem Model

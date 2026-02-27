@@ -4,6 +4,7 @@ use App\Enums\RoleType;
 use App\Helpers\MiddlewareRule;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
 
@@ -23,7 +24,6 @@ Route::middleware('auth')
     });
 
 Route::middleware('auth')
-    ->controller(ProfileController::class)
     ->prefix('profile')
     ->as('profile.')
     ->group(function () {
@@ -31,6 +31,14 @@ Route::middleware('auth')
         Route::get('/edit', [ProfileController::class, 'edit'])->name('edit');
         Route::patch('/', [ProfileController::class, 'update'])->name('update');
         Route::delete('/', [ProfileController::class, 'destroy'])->name('destroy');
+    });
+
+Route::middleware('auth')
+    ->prefix('role')
+    ->as('role.')
+    ->group(function () {
+        Route::get('/edit', [RoleController::class, 'edit'])->name('edit');
+        Route::patch('/', [RoleController::class, 'update'])->name('update');
     });
 
 Route::middleware('auth', 'role:' . RoleType::MERCHANT->value)
