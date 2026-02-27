@@ -9,12 +9,11 @@
   <main class="h-auto md:ml-72">
     <x-dashboard.navbar />
 
-    <div class="container grid gap-10 p-8 pb-20 max-w-7xl">
+    <div class="container grid gap-10 p-8 pb-20 max-w-8xl">
       <x-ui.alert variant="info" status="{{ session('info') }}" />
       <x-ui.alert variant="success" status="{{ session('success') }}" />
       <x-ui.alert variant="warning" status="{{ session('warning') }}" />
       <x-ui.alert variant="error" status="{{ session('error') }}" />
-
       {{ $slot }}
     </div>
   </main>

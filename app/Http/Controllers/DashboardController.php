@@ -6,6 +6,14 @@ namespace App\Http\Controllers;
 class DashboardController extends Controller
 {
     /**
+     * 
+     */
+    public function index()
+    {
+        return view('dashboard');
+    }
+
+    /**
      * Show the help center page.
      */
     public function help()

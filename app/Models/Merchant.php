@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\CategoryType;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -38,5 +39,13 @@ class Merchant extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Get the menus associated with the merchant.
+     */
+    public function menus(): HasMany
+    {
+        return $this->hasMany(Menu::class);
     }
 }

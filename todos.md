@@ -5,7 +5,7 @@
 - [x] Setup Authentication with Laravel UI
 - [x] Setup layouts for Authentication and Dashboard 
 - [ ] Setup Profile Management for each Role
-- [ ] Add Menu CRUD
+- [x] Add Menu CRUD
 - [ ] Add Order Model
 - [ ] Add OrderItem Model
 - [ ] Add Invoice Model

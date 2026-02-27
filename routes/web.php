@@ -1,18 +1,17 @@
 <?php
 
+use App\Enums\RoleType;
+use App\Helpers\MiddlewareRule;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MenuController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('welcome');
-
-
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::middleware('auth')
+    ->controller(DashboardController::class)
+    ->group(function () {
+        Route::get('/', 'index')->name('dashboard');
+    });
 
 Route::middleware('auth')
     ->prefix('config')
@@ -32,6 +31,11 @@ Route::middleware('auth')
         Route::get('/edit', [ProfileController::class, 'edit'])->name('edit');
         Route::patch('/', [ProfileController::class, 'update'])->name('update');
         Route::delete('/', [ProfileController::class, 'destroy'])->name('destroy');
+    });
+
+Route::middleware('auth', 'role:' . RoleType::MERCHANT->value)
+    ->group(function () {
+        Route::resource('menus', MenuController::class);
     });
 
 require __DIR__ . '/auth.php';

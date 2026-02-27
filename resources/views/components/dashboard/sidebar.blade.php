@@ -18,14 +18,14 @@
           'menus' => [
               [
                   'type' => 'link',
-                  'href' => route('welcome'),
+                  'href' => route('menus.index'),
                   'active' => request()->routeIs('menus.*'),
                   'name' => 'Menu List',
                   'icon' => 'cooking-pot',
               ],
               [
                   'type' => 'link',
-                  'href' => route('welcome'),
+                  'href' => route('menus.create'),
                   'active' => request()->routeIs('menus.create'),
                   'name' => 'Create New Menu',
                   'icon' => 'plus',
@@ -38,14 +38,14 @@
           'menus' => [
               [
                   'type' => 'link',
-                  'href' => route('welcome'),
+                  'href' => route('dashboard'),
                   'active' => request()->routeIs('orders.*'),
                   'name' => 'Order List',
                   'icon' => 'shopping-cart',
               ],
               [
                   'type' => 'link',
-                  'href' => route('welcome'),
+                  'href' => route('dashboard'),
                   'active' => request()->routeIs('orders.create'),
                   'name' => 'Create New Order',
                   'icon' => 'plus',
@@ -58,14 +58,14 @@
           'menus' => [
               [
                   'type' => 'link',
-                  'href' => route('welcome'),
+                  'href' => route('dashboard'),
                   'active' => request()->routeIs('invoices.*'),
                   'name' => 'Invoice List',
                   'icon' => 'landmark',
               ],
               [
                   'type' => 'link',
-                  'href' => route('welcome'),
+                  'href' => route('dashboard'),
                   'active' => request()->routeIs('invoices.create'),
                   'name' => 'Invoice Reports',
                   'icon' => 'archive',
@@ -78,7 +78,7 @@
 <aside {{ $props }}>
   <div class="flex flex-col h-full gap-6 overflow-y-auto">
     <div class="sticky top-0 z-10 bg-white border-b border-base-200">
-      <a href="{{ route('welcome') }}" class="flex items-center h-20 px-6">
+      <a href="{{ route('dashboard') }}" class="flex items-center h-20 px-6">
         <x-ui.logo class="max-w-40" />
       </a>
     </div>
